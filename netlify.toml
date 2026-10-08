@@ -1,0 +1,7 @@
+[build]
+command = "npm run build"
+publish = "build"
+
+[build.environment]
+SECRETS_SCAN_OMIT_PATHS = ".git,.svelte-kit"
+SECRETS_SCAN_OMIT_KEYS = "SEED_PASSWORD,SEED_USERNAME,BODY_SIZE_LIMIT"

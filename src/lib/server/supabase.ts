@@ -1,4 +1,4 @@
-import { SUPABASE_SERVICE_ROLE_KEY, SUPABASE_URL } from '$app/env/private';
+import { SUPABASE_SERVICE_ROLE_KEY, SUPABASE_URL } from '#lib/server/settings';
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 let client: SupabaseClient | null = null;

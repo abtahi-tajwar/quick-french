@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import PhraseReader from '#lib/components/PhraseReader.svelte';
 	import type { PageProps } from './$types';
 
@@ -8,6 +9,19 @@
 
 	const previous = $derived(Math.max(1, data.page - 1));
 	const next = $derived(Math.min(data.document.page_count, data.page + 1));
+
+	function goToPage(event: SubmitEvent) {
+		event.preventDefault();
+		const form = event.currentTarget;
+		if (!(form instanceof HTMLFormElement)) return;
+		const requested = Number(new FormData(form).get('page'));
+		const page = Number.isFinite(requested)
+			? Math.min(Math.max(Math.trunc(requested), 1), data.document.page_count)
+			: data.page;
+		const input = form.elements.namedItem('page');
+		if (input instanceof HTMLInputElement) input.value = String(page);
+		if (page !== data.page) goto(`?page=${page}`);
+	}
 </script>
 
 <svelte:head>
@@ -34,7 +48,25 @@
 	>
 		Previous
 	</a>
-	<p class="text-sm">Page {data.page} of {data.document.page_count}</p>
+	{#key data.page}
+		<form class="flex items-center gap-2 text-sm" onsubmit={goToPage} novalidate>
+			<label>
+				Page
+				<input
+					class="ml-1 w-16 rounded-lg border-line bg-paper px-2 py-1 text-center"
+					name="page"
+					type="number"
+					inputmode="numeric"
+					min="1"
+					max={data.document.page_count}
+					value={data.page}
+					aria-label="Page number"
+					required
+				/>
+			</label>
+			<span>of {data.document.page_count}</span>
+		</form>
+	{/key}
 	<a
 		class={[
 			'rounded-full px-3 py-2 text-sm ring-1 ring-line',
@@ -46,11 +78,11 @@
 	</a>
 	<form
 		method="POST"
-		action="?/segment"
+		action="?/segment&page={data.page}"
 		use:enhance={() => {
 			segmenting = true;
 			return async ({ update }) => {
-				await update();
+				await update({ navigate: false });
 				segmenting = false;
 			};
 		}}
