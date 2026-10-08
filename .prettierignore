@@ -1,0 +1,5 @@
+data/raw
+data/readings
+data/words.json
+build
+.svelte-kit

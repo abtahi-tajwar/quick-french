@@ -1,0 +1,38 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+@theme {
+	--font-sans: 'Outfit', 'Avenir Next', 'Segoe UI', sans-serif;
+	--font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+	--color-paper: #f3efe6;
+	--color-cream: #fffdf8;
+	--color-ink: #1c1916;
+	--color-muted: #6d655b;
+	--color-line: #e4d9c8;
+	--color-navy: #1b3a4b;
+	--color-sea: #2f6f73;
+	--color-coral: #d4533a;
+	--color-moss: #2c6b4a;
+	--color-gold: #a8843d;
+	--color-blush: #f6ddd4;
+}
+
+html {
+	color-scheme: light;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	background:
+		radial-gradient(1100px 480px at 0% -10%, #efe2cc 0%, transparent 55%),
+		radial-gradient(800px 420px at 100% 0%, #e4eee8 0%, transparent 46%), var(--color-paper);
+	color: var(--color-ink);
+	font-family: var(--font-sans);
+}
+
+:focus-visible {
+	outline: 2px solid var(--color-navy);
+	outline-offset: 2px;
+}
