@@ -7,7 +7,7 @@
 		"dev": "BODY_SIZE_LIMIT=16777216 vite dev",
 		"build": "vite build",
 		"preview": "BODY_SIZE_LIMIT=16777216 vite preview",
-		"start": "BODY_SIZE_LIMIT=16777216 node build",
+		"start": "BODY_SIZE_LIMIT=16777216 vite preview",
 		"seed": "node scripts/seed.mjs",
 		"build:vocab": "node scripts/build-vocab.mjs",
 		"prepare": "svelte-kit sync || echo ''",
@@ -18,7 +18,7 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
-		"@sveltejs/adapter-node": "^6.0.0",
+		"@sveltejs/adapter-netlify": "^7.0.1",
 		"@sveltejs/kit": "^3.0.0",
 		"@sveltejs/vite-plugin-svelte": "^7.2.0",
 		"@tailwindcss/forms": "^0.5.11",
