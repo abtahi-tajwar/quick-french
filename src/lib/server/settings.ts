@@ -1,7 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
 
-const DEFAULT_MODEL = 'gpt-5.4';
-
 function loadEnvFile() {
 	if (!existsSync('.env')) return;
 	for (const line of readFileSync('.env', 'utf8').split('\n')) {
@@ -30,4 +28,4 @@ loadEnvFile();
 export const SUPABASE_URL = setting('SUPABASE_URL');
 export const SUPABASE_SERVICE_ROLE_KEY = setting('SUPABASE_SERVICE_ROLE_KEY');
 export const OPENAI_API_KEY = setting('OPENAI_API_KEY');
-export const OPENAI_MODEL = setting('OPENAI_MODEL') || DEFAULT_MODEL;
+export const OPENAI_MODEL = setting('OPENAI_MODEL');
